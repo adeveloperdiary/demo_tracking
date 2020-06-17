@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DemoWeatherService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.service.demo</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DemoWeatherService (com.service.demo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DemoWeatherService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.service.demo;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>4</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i>5</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>6</i>&nbsp;import org.springframework.web.bind.annotation.RequestMethod;
+<i>7</i>&nbsp;import org.springframework.web.bind.annotation.RequestParam;
+<i>8</i>&nbsp;import org.springframework.web.bind.annotation.RestController;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>11</i>&nbsp;import java.util.Random;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@RestController
+<b class="nc"><i>14</i>&nbsp;public class DemoWeatherService {</b>
+<i>15</i>&nbsp;    @RequestMapping(value = &quot;/weather&quot;, method = RequestMethod.GET, produces = &quot;application/json&quot;)
+<i>16</i>&nbsp;    public ResponseEntity&lt;String&gt; getWeatherDetails(@RequestParam(value = &quot;lat&quot;) double lat,
+<i>17</i>&nbsp;                                                    @RequestParam(value = &quot;lon&quot;) double lon,
+<i>18</i>&nbsp;                                                    @RequestParam(value = &quot;start&quot;) long start,
+<i>19</i>&nbsp;                                                    @RequestParam(value = &quot;appid&quot;) String appid,
+<i>20</i>&nbsp;                                                    @RequestParam(value = &quot;type&quot;) String type,
+<i>21</i>&nbsp;                                                    @RequestParam(value = &quot;cnt&quot;) int cnt,
+<i>22</i>&nbsp;                                                    HttpServletRequest request) {
+<i>23</i>&nbsp;
+<b class="nc"><i>24</i>&nbsp;        String[] weather_desc = {&quot;rainy&quot;, &quot;stormy&quot;, &quot;sunny&quot;, &quot;cloudy&quot;, &quot;windy&quot;, &quot;typhoons&quot;, &quot;sand-storms&quot;, &quot;snow-storms&quot;, &quot;tornados&quot;, &quot;foggy&quot;, &quot;snow&quot;, &quot;thundersnow&quot;, &quot;hail&quot;, &quot;sleet&quot;, &quot;wildfire&quot;, &quot;blizzard&quot;, &quot;avalanche&quot;, &quot;mist&quot;, &quot;thunderstorms&quot;};</b>
+<b class="nc"><i>25</i>&nbsp;        Random rand = new Random();</b>
+<b class="nc"><i>26</i>&nbsp;        int n = rand.nextInt(weather_desc.length);</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;
+<b class="nc"><i>29</i>&nbsp;        String template = &quot;{\&quot;message\&quot;:\&quot;\&quot;,\&quot;cod\&quot;:\&quot;200\&quot;,\&quot;city_id\&quot;:4887398,\&quot;calctime\&quot;:0.0863,\&quot;cnt\&quot;:1,\&quot;list\&quot;:[{\&quot;main\&quot;:{\&quot;temp\&quot;:268.987,\&quot;temp_min\&quot;:268.987,\&quot;temp_max\&quot;:268.987,\&quot;pressure\&quot;:1001.11,\&quot;sea_level\&quot;:1024.68,\&quot;grnd_level\&quot;:1001.11,\&quot;humidity\&quot;:100},\&quot;wind\&quot;:{\&quot;speed\&quot;:5.06,\&quot;deg\&quot;:291.002},\&quot;clouds\&quot;:{\&quot;all\&quot;:48},\&quot;weather\&quot;:[{\&quot;id\&quot;:802,\&quot;main\&quot;:\&quot;&quot; + weather_desc[n] + &quot;\&quot;,\&quot;icon\&quot;:\&quot;03d\&quot;}],\&quot;dt\&quot;:1485703465}]}&quot;;</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;
+<b class="nc"><i>32</i>&nbsp;        return new ResponseEntity&lt;&gt;(template, HttpStatus.OK);</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

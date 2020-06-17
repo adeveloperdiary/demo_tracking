@@ -1,0 +1,289 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EventController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.events.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EventController (com.tracking.events.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/ 28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.events.controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.tracking.events.repository.entity.WeeklyReport;
+<i>5</i>&nbsp;import com.tracking.events.service.EventService;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import com.tracking.events.repository.EventRepository;
+<i>8</i>&nbsp;import com.tracking.events.repository.entity.Event;
+<i>9</i>&nbsp;import com.tracking.exception.APIException;
+<i>10</i>&nbsp;import com.tracking.users.repository.UserRepository;
+<i>11</i>&nbsp;import com.tracking.users.repository.entity.User;
+<i>12</i>&nbsp;import org.slf4j.Logger;
+<i>13</i>&nbsp;import org.slf4j.LoggerFactory;
+<i>14</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>15</i>&nbsp;import org.springframework.data.domain.Page;
+<i>16</i>&nbsp;import org.springframework.data.domain.Pageable;
+<i>17</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i>18</i>&nbsp;import org.springframework.security.access.prepost.PostAuthorize;
+<i>19</i>&nbsp;import org.springframework.security.access.prepost.PreAuthorize;
+<i>20</i>&nbsp;import org.springframework.security.oauth2.provider.OAuth2Authentication;
+<i>21</i>&nbsp;import org.springframework.validation.annotation.Validated;
+<i>22</i>&nbsp;import org.springframework.web.bind.annotation.*;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;import javax.validation.Valid;
+<i>25</i>&nbsp;import java.util.List;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Controller class of the event rest api endpoints. This class implements the CRUD operations
+<i>29</i>&nbsp; * using Spring Boot&#39;s @RestController annotation.
+<i>30</i>&nbsp; *
+<i>31</i>&nbsp; * @version 1.0
+<i>32</i>&nbsp; * @dete 05-18-2020
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;@RestController
+<i>36</i>&nbsp;@RequestMapping(&quot;/api/event&quot;)
+<i>37</i>&nbsp;@Validated
+<i>38</i>&nbsp;public class EventController {
+<i>39</i>&nbsp;
+<b class="fc"><i>40</i>&nbsp;    Logger logger = LoggerFactory.getLogger(getClass());</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /* The instance variable of EventService class */
+<i>43</i>&nbsp;    @Autowired
+<i>44</i>&nbsp;    private EventService service;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /* The instance variable of EventRepository class */
+<i>47</i>&nbsp;    @Autowired
+<i>48</i>&nbsp;    private EventRepository repository;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    /* The instance variable of UserRepository class */
+<i>51</i>&nbsp;    @Autowired
+<i>52</i>&nbsp;    private UserRepository userRepository;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;    public EventController(EventService service, EventRepository repository, UserRepository userRepository) {</b>
+<b class="fc"><i>56</i>&nbsp;        this.service = service;</b>
+<b class="fc"><i>57</i>&nbsp;        this.repository = repository;</b>
+<b class="fc"><i>58</i>&nbsp;        this.userRepository = userRepository;</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    /**
+<i>62</i>&nbsp;     * This method implements the endpoint to return the list of all the events as json array.
+<i>63</i>&nbsp;     *
+<i>64</i>&nbsp;     * @param pageable
+<i>65</i>&nbsp;     * @param authentication
+<i>66</i>&nbsp;     * @return Page&lt;Event&gt;
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @GetMapping
+<i>70</i>&nbsp;    public Page&lt;Event&gt; all(Pageable pageable, OAuth2Authentication authentication) {
+<b class="fc"><i>71</i>&nbsp;        return service.findAllEvents(pageable, authentication);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     * This method implements the endpoint to generate weekly report for getting average speed and distance per user.
+<i>76</i>&nbsp;     *
+<i>77</i>&nbsp;     * @param id
+<i>78</i>&nbsp;     * @param authentication
+<i>79</i>&nbsp;     * @return ResponseEntity&lt;List &lt; WeeklyReport&gt;&gt;
+<i>80</i>&nbsp;     */
+<i>81</i>&nbsp;    @GetMapping(&quot;/report&quot;)
+<i>82</i>&nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ADMIN&#39;) || hasAuthority(&#39;USER&#39;)&quot;)
+<i>83</i>&nbsp;    public ResponseEntity&lt;List&lt;WeeklyReport&gt;&gt; report(@RequestParam(value = &quot;id&quot;, required = false) Long id,
+<i>84</i>&nbsp;                                                     OAuth2Authentication authentication) {
+<b class="fc"><i>85</i>&nbsp;        return service.createWeeklyReport(id, authentication);</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    /**
+<i>89</i>&nbsp;     * This method implements the endpoint to search for any event using advance filter operation. Using rsql-parser
+<i>90</i>&nbsp;     * for the advance filter capabilities. The rsql-parser default code needed to be updated for supporting LocalDate
+<i>91</i>&nbsp;     * and other fields. Please refer the package com.tracking.rsql for more details.
+<i>92</i>&nbsp;     *
+<i>93</i>&nbsp;     * @param search
+<i>94</i>&nbsp;     * @param pageable
+<i>95</i>&nbsp;     * @param authentication
+<i>96</i>&nbsp;     * @return Page&lt;Event&gt;
+<i>97</i>&nbsp;     */
+<i>98</i>&nbsp;    @GetMapping(&quot;/find&quot;)
+<i>99</i>&nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ADMIN&#39;) || hasAuthority(&#39;USER&#39;)&quot;)
+<i>100</i>&nbsp;    public Page&lt;Event&gt; find(@RequestParam(value = &quot;search&quot;) String search,
+<i>101</i>&nbsp;                            Pageable pageable, OAuth2Authentication authentication) {
+<b class="fc"><i>102</i>&nbsp;        return service.find(search, pageable, authentication);</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    /**
+<i>106</i>&nbsp;     * This method implements the endpoint to fetch an existing event from the database. The @PostAuthorize annotation was
+<i>107</i>&nbsp;     * added to make sure only ADMIN can fetch event for any user or user can fetch events only for him/her self.
+<i>108</i>&nbsp;     * In case the role is USER and the id passed does not match with the one from OAuth server, then the function
+<i>109</i>&nbsp;     * will be executed but unauthorised error will be sent back to consumer.
+<i>110</i>&nbsp;     *
+<i>111</i>&nbsp;     * @param id
+<i>112</i>&nbsp;     * @return Event
+<i>113</i>&nbsp;     */
+<i>114</i>&nbsp;    @GetMapping(&quot;/{id}&quot;)
+<i>115</i>&nbsp;    @PostAuthorize(&quot;hasAuthority(&#39;ADMIN&#39;) || (returnObject.user == @userRepository.findByEmail(authentication.principal).get() &amp;&amp; hasAuthority(&#39;USER&#39;))&quot;)
+<i>116</i>&nbsp;    public Event one(@PathVariable Long id) {
+<i>117</i>&nbsp;        /* Find the event or throw error if not found*/
+<b class="fc"><i>118</i>&nbsp;        return repository.findById(id).orElseThrow(() -&gt; new APIException(Event.class, &quot; Event not found with id &quot;, id.toString()));</b>
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    /**
+<i>122</i>&nbsp;     * This method implements the endpoint to update an existing event in the database. The @PreAuthorize annotation was
+<i>123</i>&nbsp;     * added to make sure only ADMIN can update event for any user or user can update events only for him/her self.
+<i>124</i>&nbsp;     * In case the role is USER and the id passed does not match with the one from OAuth server, then the function
+<i>125</i>&nbsp;     * wont be executed and unauthorised error will be sent back to consumer. The newly updated event will be returned
+<i>126</i>&nbsp;     * back to consumer as JSON object.The @Valid annotation has been used to make sure all the required parameters are
+<i>127</i>&nbsp;     * provided by consumer.
+<i>128</i>&nbsp;     *
+<i>129</i>&nbsp;     * @param id
+<i>130</i>&nbsp;     * @param newEvent
+<i>131</i>&nbsp;     */
+<i>132</i>&nbsp;    @PutMapping(&quot;/{id}&quot;)
+<i>133</i>&nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ADMIN&#39;) || (@eventRepository.findById(#id).orElse(new com.tracking.events.repository.entity.Event()).user == @userRepository.findByEmail(authentication.principal).get() &amp;&amp; hasAuthority(&#39;USER&#39;))&quot;)
+<i>134</i>&nbsp;    public void update(@PathVariable Long id, @Valid @RequestBody Event newEvent) {
+<i>135</i>&nbsp;        /* Make sure the event is available in the db */
+<b class="fc"><i>136</i>&nbsp;        if (repository.existsById(id)) {</b>
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;            /* Set the id of the event */
+<b class="fc"><i>139</i>&nbsp;            newEvent.setId(id);</b>
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;            /* Find the existing event */
+<b class="fc"><i>142</i>&nbsp;            Event existingEvent = repository.findById(id).get();</b>
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;            /* Set the created date and user */
+<b class="fc"><i>145</i>&nbsp;            newEvent.setCreatedDate(existingEvent.getCreatedDate());</b>
+<b class="fc"><i>146</i>&nbsp;            newEvent.setUser(existingEvent.getUser());</b>
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;            /* validate the event by validating the event data */
+<b class="fc"><i>149</i>&nbsp;            newEvent = service.validateEvent(newEvent);</b>
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;            /* Save the event */
+<b class="fc"><i>152</i>&nbsp;            repository.save(newEvent);</b>
+<b class="fc"><i>153</i>&nbsp;        } else {</b>
+<i>154</i>&nbsp;            /* Throw error if no event with the given id is present in the database */
+<b class="fc"><i>155</i>&nbsp;            throw new APIException(Event.class, &quot; Event not found with id &quot;, id.toString());</b>
+<i>156</i>&nbsp;        }
+<b class="fc"><i>157</i>&nbsp;    }</b>
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    /**
+<i>160</i>&nbsp;     * This method implements the endpoint to create a new event in the database. The @PreAuthorize annotation was
+<i>161</i>&nbsp;     * added to make sure only ADMIN can add new event for any user or user can add events only for him/her self.
+<i>162</i>&nbsp;     * In case the role is USER and the id passed does not match with the one from OAuth server, then the function
+<i>163</i>&nbsp;     * wont be executed and unauthorised error will be sent back to consumer. The newly added event will be returned
+<i>164</i>&nbsp;     * back to consumer as JSON object.The @Valid annotation has been used to make sure all the required parameters are
+<i>165</i>&nbsp;     * provided by consumer.
+<i>166</i>&nbsp;     *
+<i>167</i>&nbsp;     * @param event
+<i>168</i>&nbsp;     * @return Event
+<i>169</i>&nbsp;     */
+<i>170</i>&nbsp;    @PostMapping
+<i>171</i>&nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ADMIN&#39;) || (#event != null &amp;&amp; #event.user.id == @userRepository.findByEmail(authentication.principal).get().id &amp;&amp; hasAuthority(&#39;USER&#39;))&quot;)
+<i>172</i>&nbsp;    public Event create(@Valid @RequestBody Event event) {
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;        /* first processing the event by validating the event data and fetching weather api service */
+<b class="fc"><i>175</i>&nbsp;        event = service.processEvent(event);</b>
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;        /* Save the new event to the database*/
+<b class="fc"><i>178</i>&nbsp;        Event newEvent = repository.save(event);</b>
+<b class="fc"><i>179</i>&nbsp;        newEvent.setUser(userRepository.findById(newEvent.getUser().getId()).get());</b>
+<i>180</i>&nbsp;
+<b class="fc"><i>181</i>&nbsp;        return newEvent;</b>
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    /**
+<i>185</i>&nbsp;     * This method implements the endpoint to delete an event from the database. The @PreAuthorize annotation was
+<i>186</i>&nbsp;     * added to make sure only ADMIN can delete event for any user or user can delete events only for him/her self.
+<i>187</i>&nbsp;     * In case the role is USER and the id passed does not match with the one from OAuth server, then the function
+<i>188</i>&nbsp;     * wont be executed and unauthorised error will be sent back to consumer.
+<i>189</i>&nbsp;     *
+<i>190</i>&nbsp;     * @param id
+<i>191</i>&nbsp;     */
+<i>192</i>&nbsp;    @DeleteMapping(&quot;/{id}&quot;)
+<i>193</i>&nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ADMIN&#39;) || (@eventRepository.findById(#id).orElse(new com.tracking.events.repository.entity.Event()).user == @userRepository.findByEmail(authentication.principal).get() &amp;&amp; hasAuthority(&#39;USER&#39;))&quot;)
+<i>194</i>&nbsp;    public void delete(@PathVariable Long id) {
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;        /* Make sure the event is available in the db */
+<b class="fc"><i>197</i>&nbsp;        if (repository.existsById(id)) {</b>
+<i>198</i>&nbsp;            /* Save the event */
+<b class="fc"><i>199</i>&nbsp;            repository.deleteById(id);</b>
+<i>200</i>&nbsp;        } else {
+<i>201</i>&nbsp;            /* Throw error if no event with the given id is present in the database */
+<b class="fc"><i>202</i>&nbsp;            throw new APIException(Event.class, &quot; Event not found with id &quot;, id.toString());</b>
+<i>203</i>&nbsp;        }
+<b class="fc"><i>204</i>&nbsp;    }</b>
+<i>205</i>&nbsp;
+<i>206</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

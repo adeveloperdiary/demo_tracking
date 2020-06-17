@@ -1,0 +1,89 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EventRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.events.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EventRepository (com.tracking.events.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">EventRepository$MockitoMock$677207780</td>
+  </tr>
+  <tr>
+    <td class="name">EventRepository$MockitoMock$677207780$auxiliary$8lpHSOmF</td>
+  </tr>
+  <tr>
+    <td class="name">EventRepository$MockitoMock$677207780$auxiliary$oPqsc4b9</td>
+  </tr>
+  <tr>
+    <td class="name">EventRepository$MockitoMock$798132728</td>
+  </tr>
+  <tr>
+    <td class="name">EventRepository$MockitoMock$798132728$auxiliary$59fHZrkp</td>
+  </tr>
+  <tr>
+    <td class="name">EventRepository$MockitoMock$798132728$auxiliary$lbBztVNq</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.events.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.tracking.events.repository.entity.Event;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import com.tracking.users.repository.entity.User;
+<i>6</i>&nbsp;import org.springframework.data.domain.Page;
+<i>7</i>&nbsp;import org.springframework.data.domain.Pageable;
+<i>8</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>9</i>&nbsp;import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+<i>10</i>&nbsp;import org.springframework.data.repository.PagingAndSortingRepository;
+<i>11</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; * JPA Interface of the event rest api. The findAllByUser custom function has been defined.
+<i>15</i>&nbsp; *
+<i>16</i>&nbsp; * @version 1.0
+<i>17</i>&nbsp; * @dete 05-18-2020
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;@Repository
+<i>20</i>&nbsp;public interface EventRepository
+<i>21</i>&nbsp;        extends JpaRepository&lt;Event, Long&gt;, JpaSpecificationExecutor&lt;Event&gt;,
+<i>22</i>&nbsp;        PagingAndSortingRepository&lt;Event, Long&gt; {
+<i>23</i>&nbsp;    Page&lt;Event&gt; findAllByUser(User user, Pageable pageable);
+<i>24</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

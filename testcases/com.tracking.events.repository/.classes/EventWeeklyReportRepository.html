@@ -1,0 +1,90 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EventWeeklyReportRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.events.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EventWeeklyReportRepository (com.tracking.events.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">EventWeeklyReportRepository$MockitoMock$325339499</td>
+  </tr>
+  <tr>
+    <td class="name">EventWeeklyReportRepository$MockitoMock$325339499$auxiliary$dX8LyeAn</td>
+  </tr>
+  <tr>
+    <td class="name">EventWeeklyReportRepository$MockitoMock$325339499$auxiliary$tPz6j2fE</td>
+  </tr>
+  <tr>
+    <td class="name">EventWeeklyReportRepository$MockitoMock$662224980</td>
+  </tr>
+  <tr>
+    <td class="name">EventWeeklyReportRepository$MockitoMock$662224980$auxiliary$G5c2LWt4</td>
+  </tr>
+  <tr>
+    <td class="name">EventWeeklyReportRepository$MockitoMock$662224980$auxiliary$LLgcsRXp</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.events.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.tracking.events.repository.entity.Event;
+<i>4</i>&nbsp;import com.tracking.events.repository.entity.WeeklyReport;
+<i>5</i>&nbsp;import org.springframework.data.jpa.repository.Query;
+<i>6</i>&nbsp;import org.springframework.data.repository.CrudRepository;
+<i>7</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;/**
+<i>12</i>&nbsp; * JPA Interface of the event weekly report. The @Query annotation has been used with nativeQuery set to true.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * @version 1.0
+<i>15</i>&nbsp; * @dete 05-18-2020
+<i>16</i>&nbsp; */
+<i>17</i>&nbsp;@Repository
+<i>18</i>&nbsp;public interface EventWeeklyReportRepository extends CrudRepository&lt;Event, Long&gt; {
+<i>19</i>&nbsp;    @Query(nativeQuery = true, value =
+<i>20</i>&nbsp;            &quot;select avg(e.distance/NULLIF(e.duration,0)) as speed, avg(e.distance) as distance, extract(week from e.date) as week, extract(year from e.date) as year &quot; +
+<i>21</i>&nbsp;                    &quot; from event e, user u &quot; +
+<i>22</i>&nbsp;                    &quot; where e.user_id=u.id and u.id=:user_id &quot; +
+<i>23</i>&nbsp;                    &quot; group by extract(week from e.date),extract(year from e.date) order by extract(year from e.date) desc, extract(week from e.date) desc&quot;)
+<i>24</i>&nbsp;    List&lt;WeeklyReport&gt; findWeeklyReport(int user_id);
+<i>25</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>
