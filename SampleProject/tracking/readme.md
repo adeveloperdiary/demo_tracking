@@ -1,18 +1,6 @@
 # Jogging Tracking API
 The objective is to build a Jogging Tracking API based application.  
 
-## Functionalities
-- API Users must be able to create an account and log in.
-- All API calls must be authenticated.
-- Implement at least three roles with different permission levels.
-- Based on the provided date and location, API should connect to a weather API provider and get the weather conditions for the run (demo weather service)
-- The API must create a report on average speed & distance per week.
-- The API must be able to return data in the JSON format.
-- The API should provide filter capabilities for all endpoints that return a list of elements, as well should be able to support pagination.
-- The API filtering should allow using parenthesis for defining operations precedence and use any combination of the available fields. The supported operations should at least include or, and, eq (equals), ne (not equals), gt (greater than), lt (lower than).
-    - Example -> (date eq '2016-05-01') AND ((distance gt 20) OR (distance lt 10)).
-- Write unit and e2e tests.
-
 ## High Level Design
 Here is the high level design diagram of API implementation. The application is being based on Java Spring Boot and H2 as Database.
 The Spring boot application also contains the OAuth Server. Spring JPA has been used along with rsql.    
