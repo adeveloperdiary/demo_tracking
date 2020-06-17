@@ -1,0 +1,4740 @@
+{
+	"info": {
+		"_postman_id": "d7ea2c98-96ab-4777-bca0-b0206c32cb5b",
+		"name": "TrackingService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserServices",
+			"item": [
+				{
+					"name": "success",
+					"item": [
+						{
+							"name": "/api/users",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/listUsers.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											" ",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function() {",
+											"    ",
+											"    var result=tv4.validateResult(JSON.parse(responseBody), schema);",
+											" ",
+											"    if(!result.valid){",
+											"        console.log(result);",
+											"    }",
+											" ",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQzMTU0LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiZjZmZThjMzEtMzI2YS00OTMwLWI5MGUtNDU5MjZiZjMwODRjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.kYFEfyiIFEa5i4eO5v1ODRsiuxCPhUgRU8tI3CdBajo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODAzNzAsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImUxOWYzZDRkLTA0ZDktNDhmYS1hMzlhLWYyNWM1Mzg5NzJlYiIsImNsaWVudF9pZCI6ImV2ZW50In0.6z-ZiZvAgN3641HgbUuhaDiAGwrso7no8lwfRWlLh0k",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/listUsers.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											" ",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function() {",
+											"    ",
+											"    var result=tv4.validateResult(JSON.parse(responseBody), schema);",
+											" ",
+											"    if(!result.valid){",
+											"        console.log(result);",
+											"    }",
+											" ",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/search?email=user1@user1.com",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "user1@user1.com"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/getUser.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											" ",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function() {",
+											"    ",
+											"    var result=tv4.validateResult(JSON.parse(responseBody), schema);",
+											" ",
+											"    if(!result.valid){",
+											"        console.log(result);",
+											"    }",
+											" ",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODAzNzAsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImUxOWYzZDRkLTA0ZDktNDhmYS1hMzlhLWYyNWM1Mzg5NzJlYiIsImNsaWVudF9pZCI6ImV2ZW50In0.6z-ZiZvAgN3641HgbUuhaDiAGwrso7no8lwfRWlLh0k",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODAzNzAsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImUxOWYzZDRkLTA0ZDktNDhmYS1hMzlhLWYyNWM1Mzg5NzJlYiIsImNsaWVudF9pZCI6ImV2ZW50In0.6z-ZiZvAgN3641HgbUuhaDiAGwrso7no8lwfRWlLh0k",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 4,\n    \"email\": \"user41@user41.com\",\n    \"role\": \"USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"4"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/getUser.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODA4NTIsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjAxYTA3ODMyLTY4OGQtNGU1OC1hZjZhLWQ0MWM0OWFiM2FhOCIsImNsaWVudF9pZCI6ImV2ZW50In0.YpCkHfS2U8Ha8K4vtyfuGZPchDu3117PDNwMmCwvI9g",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user_new1@user_new.com\",\n    \"role\": \"USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODA4NTIsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjAxYTA3ODMyLTY4OGQtNGU1OC1hZjZhLWQ0MWM0OWFiM2FhOCIsImNsaWVudF9pZCI6ImV2ZW50In0.YpCkHfS2U8Ha8K4vtyfuGZPchDu3117PDNwMmCwvI9g",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"4"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}/changePassword",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODA4NTIsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjAxYTA3ODMyLTY4OGQtNGU1OC1hZjZhLWQ0MWM0OWFiM2FhOCIsImNsaWVudF9pZCI6ImV2ZW50In0.YpCkHfS2U8Ha8K4vtyfuGZPchDu3117PDNwMmCwvI9g",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/1/changePassword?oldPassword=pwd&newPassword=pwd1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"1",
+										"changePassword"
+									],
+									"query": [
+										{
+											"key": "oldPassword",
+											"value": "pwd"
+										},
+										{
+											"key": "newPassword",
+											"value": "pwd1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/signin/validateEmail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "485647ae-43b0-4915-a719-008720ec49d5",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"pm.test(\"Body is correct\", function () {",
+											"    pm.expect(pm.response.to.have.body(\"true\"));",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/signin/validateEmail?email=admin@admin.com",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"signin",
+										"validateEmail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "admin@admin.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/signin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "485647ae-43b0-4915-a719-008720ec49d5",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9de27996-5b3d-4005-9c61-0cb34899b268",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/getUser.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/signin?email=admin1233@admin.com&password=pwd",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"signin"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "admin1233@admin.com"
+										},
+										{
+											"key": "password",
+											"value": "pwd"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "failure",
+					"item": [
+						{
+							"name": "/api/users/search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDI0OTUsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNDEwZTdmOTgtMDM1ZC00YTZmLTllMDItZjUzMTE1OTQzNzg0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.N67YHN6qcXcC1wApWmDSmC6thpTlcC84PjxTlY-Yvmo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODIwMzksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiMjZlOTQ5MjMtYTgwZC00ZjVlLTkxZjEtMTUyYzU2ZDBkZDQ5IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.S6MfTOQYJS1tEgwV4CZozEuXgqQxRHJMt3soLPCCALQ",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/search?email=user2@user2.com",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "user2@user2.com"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDI0OTUsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNDEwZTdmOTgtMDM1ZC00YTZmLTllMDItZjUzMTE1OTQzNzg0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.N67YHN6qcXcC1wApWmDSmC6thpTlcC84PjxTlY-Yvmo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODIwMzksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiMjZlOTQ5MjMtYTgwZC00ZjVlLTkxZjEtMTUyYzU2ZDBkZDQ5IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.S6MfTOQYJS1tEgwV4CZozEuXgqQxRHJMt3soLPCCALQ",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"5"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDI0OTUsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNDEwZTdmOTgtMDM1ZC00YTZmLTllMDItZjUzMTE1OTQzNzg0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.N67YHN6qcXcC1wApWmDSmC6thpTlcC84PjxTlY-Yvmo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODI2MDksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZjE4MzY2MmUtNzcwZS00NTAzLTk4NGYtYzFhYTNjNGNjZGU0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.hAAiP70-5D26Djvn3FvQz522wunGM7M_R_5aZCyioQk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 4,\n    \"email\": \"user41@user41.com\",\n    \"role\": \"USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDI0OTUsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNDEwZTdmOTgtMDM1ZC00YTZmLTllMDItZjUzMTE1OTQzNzg0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.N67YHN6qcXcC1wApWmDSmC6thpTlcC84PjxTlY-Yvmo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODI2MDksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZjE4MzY2MmUtNzcwZS00NTAzLTk4NGYtYzFhYTNjNGNjZGU0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.hAAiP70-5D26Djvn3FvQz522wunGM7M_R_5aZCyioQk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user_new1@user_new.com\",\n    \"role\": \"USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDI0OTUsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNDEwZTdmOTgtMDM1ZC00YTZmLTllMDItZjUzMTE1OTQzNzg0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.N67YHN6qcXcC1wApWmDSmC6thpTlcC84PjxTlY-Yvmo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODI2MDksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZjE4MzY2MmUtNzcwZS00NTAzLTk4NGYtYzFhYTNjNGNjZGU0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.hAAiP70-5D26Djvn3FvQz522wunGM7M_R_5aZCyioQk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"4"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id}/changePassword",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDI0OTUsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNDEwZTdmOTgtMDM1ZC00YTZmLTllMDItZjUzMTE1OTQzNzg0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.N67YHN6qcXcC1wApWmDSmC6thpTlcC84PjxTlY-Yvmo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODI2MDksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZjE4MzY2MmUtNzcwZS00NTAzLTk4NGYtYzFhYTNjNGNjZGU0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.hAAiP70-5D26Djvn3FvQz522wunGM7M_R_5aZCyioQk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users/1/changePassword?oldPassword=pwd&newPassword=pwd1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"1",
+										"changePassword"
+									],
+									"query": [
+										{
+											"key": "oldPassword",
+											"value": "pwd"
+										},
+										{
+											"key": "newPassword",
+											"value": "pwd1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/users/{id} [BAD_REQUEST]",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "744daf10-6bba-435d-a893-587e612de3f2",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/api_error_details.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3386dfcd-3414-4318-91fb-c0a36c6bf0b2",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==BAD_REQUEST\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"BAD_REQUEST\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA4OTQxNzAsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjE1MDU4NjJjLTJiZDItNDM4Mi1hZWM3LWM0MDE4Nzc1NDk5ZSIsImNsaWVudF9pZCI6ImV2ZW50In0.dbkdsNNGrKipyrcJu7Ld3JXj-8nCFJxtwyx_6rcnvF0",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxODI2MDksImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZjE4MzY2MmUtNzcwZS00NTAzLTk4NGYtYzFhYTNjNGNjZGU0IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.hAAiP70-5D26Djvn3FvQz522wunGM7M_R_5aZCyioQk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role\": \"USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "/api/users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxNzkxNDEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjllZWRlMTdkLTAxYTEtNDhkYS1iMmU3LTJkMzcwMmQ2OGUyYyIsImNsaWVudF9pZCI6ImV2ZW50In0.w2lBKvF4JR6497zkc4153Iy4Cekccu1tpHxfqHsrTJk",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"distance\":\"010.0\",\"lat\":-82.06,\"lon\":34.53, \"event_date\":\"2020-05-18 02:07:22\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8080/api/users",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 May 2020 20:19:15 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"role\": \"ADMIN\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"userman@userman.com\",\n            \"role\": \"USER_MANAGER\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"user1@user1.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"user2@user2.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"user3@user3.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"user4@user4.com\",\n            \"role\": \"USER\"\n        },\n        {\n            \"id\": 7,\n            \"email\": \"user5@user5.com\",\n            \"role\": \"USER\"\n        }\n    ],\n    \"pageable\": {\n        \"sort\": {\n            \"sorted\": false,\n            \"unsorted\": true,\n            \"empty\": true\n        },\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 2000,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 7,\n    \"last\": true,\n    \"size\": 2000,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": false,\n        \"unsorted\": true,\n        \"empty\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 7,\n    \"empty\": false\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EventService",
+			"item": [
+				{
+					"name": "success",
+					"item": [
+						{
+							"name": "/api/event",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/listevent.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAxOTgxNDYsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiNGYwZGE0M2ItYTM1MC00YTU4LWI3MGUtMjBhOGMzZjQ0NjNiIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.WMvthYTDI-PbdkRVyD3rsok9m9cbmRyaQBe-e4Ku5NM",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/report",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/report.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAyMDA4MzMsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZmFiN2VmNGItMDQzMC00NTA0LWFlOTctNjhiNTUwMzM4ZGJiIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.GZyhnvtQLuUz6ZrPYJmDJvYZReBYzhrk05-2iBuCVCI",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/report",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"report"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/find",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/listevent.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAyMDA4MzMsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZmFiN2VmNGItMDQzMC00NTA0LWFlOTctNjhiNTUwMzM4ZGJiIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.GZyhnvtQLuUz6ZrPYJmDJvYZReBYzhrk05-2iBuCVCI",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/find?search= ( distance<=3.0 and distance >100 ) and date==2008-11-04",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"find"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": " ( distance<=3.0 and distance >100 ) and date==2008-11-04"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/event.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAyMDA4MzMsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZmFiN2VmNGItMDQzMC00NTA0LWFlOTctNjhiNTUwMzM4ZGJiIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.GZyhnvtQLuUz6ZrPYJmDJvYZReBYzhrk05-2iBuCVCI",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/61",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/event.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAyMDA4MzMsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiZmFiN2VmNGItMDQzMC00NTA0LWFlOTctNjhiNTUwMzM4ZGJiIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.GZyhnvtQLuUz6ZrPYJmDJvYZReBYzhrk05-2iBuCVCI",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2020-04-26\",\n    \"time\": \"19:28:05\",\n    \"distance\": 999.0,\n    \"duration\": 999.0,\n    \"lat\": -51.192144,\n    \"lon\": -14.519091,\n    \"weatherCondition\": \"cloudy\",\n    \"createdDate\": \"2020-05-22T21:22:06.91881\",\n    \"modifiedDate\": \"2020-05-22T21:22:06.918815\",\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"user1@user1.com\",\n        \"role\": \"USER\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/61",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema={}",
+											" ",
+											"pm.sendRequest(\"http://localhost:8008/event.json\", function (err, response) {",
+											"    schema=response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAyMDE1MTQsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiMjVkMGZmZjEtY2ZkMC00NjliLWIwYTctNzNjYTJiOGNkNzgxIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.3EpQDcBRlB14yCV4n-gf7e4CCm3t8l6uWNnUlafedpI",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2020-04-26\",\n    \"time\": \"19:28:05\",\n    \"distance\": 1000.0,\n    \"duration\": 1000.0,\n    \"lat\": -51.192144,\n    \"lon\": -14.519091,\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"user1@user1.com\",\n        \"role\": \"USER\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA2NDIzMTYsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6ImZjODU2OGE4LTE5M2MtNDNkNi1hMGYzLTYxOTQ5NGM4OGRiZCIsImNsaWVudF9pZCI6ImV2ZW50In0.CnpeNeb4_CiPkwDAy7sKYU7VG1oCHqUbFt1WmFPEX6w",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXIxQHVzZXIxLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTAyMDE1MTQsImF1dGhvcml0aWVzIjpbIlVTRVIiXSwianRpIjoiMjVkMGZmZjEtY2ZkMC00NjliLWIwYTctNzNjYTJiOGNkNzgxIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.3EpQDcBRlB14yCV4n-gf7e4CCm3t8l6uWNnUlafedpI",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/208",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"208"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "failure",
+					"item": [
+						{
+							"name": "/api/event",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAxNjA4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiMzA5MzQ5MGItMjM1NS00MTQzLTg3YjQtMTUwNDQwZTNhMGNjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.-45uS8cKQTAAaJ90GgsmK34Gs9RjXdySuMq_34L32tA",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/report",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAxNzc1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiNDlkZTc1YzMtNzQ0NS00NzhkLTg3MDQtY2Q4NDM3OTcyYTA4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.9njtykUhCuUBOs77CUHxW4PIuEGoIRdeEixbrf3I2Dg",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/report?id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"report"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/find",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAyMDA1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYTc2ZGE1M2MtODgxYy00MzE3LTgwZDgtNDEyZDZlOWU3NjFjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.KoonwMumYSCsbhggD54Tvd8uWmcd2ElqKZFs9bcWkK4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/find?search=(distance>800 or distance < 400) and weatherCondition==sunny&sort=distance,desc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"find"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "(distance>800 or distance < 400) and weatherCondition==sunny"
+										},
+										{
+											"key": "sort",
+											"value": "distance,desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAyMDA1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYTc2ZGE1M2MtODgxYy00MzE3LTgwZDgtNDEyZDZlOWU3NjFjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.KoonwMumYSCsbhggD54Tvd8uWmcd2ElqKZFs9bcWkK4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "size",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "distance.dir",
+											"value": "asc",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/61",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAyMDA1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYTc2ZGE1M2MtODgxYy00MzE3LTgwZDgtNDEyZDZlOWU3NjFjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.KoonwMumYSCsbhggD54Tvd8uWmcd2ElqKZFs9bcWkK4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2020-04-26\",\n    \"time\": \"19:28:05\",\n    \"distance\": 999.0,\n    \"duration\": 999.0,\n    \"lat\": -51.192144,\n    \"lon\": -14.519091,\n    \"weatherCondition\": \"cloudy\",\n    \"createdDate\": \"2020-05-22T21:22:06.91881\",\n    \"modifiedDate\": \"2020-05-22T21:22:06.918815\",\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"user1@user1.com\",\n        \"role\": \"USER\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAyMDA1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYTc2ZGE1M2MtODgxYy00MzE3LTgwZDgtNDEyZDZlOWU3NjFjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.KoonwMumYSCsbhggD54Tvd8uWmcd2ElqKZFs9bcWkK4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2020-04-26\",\n    \"time\": \"19:28:05\",\n    \"distance\": 999.0,\n    \"duration\": 999.0,\n    \"lat\": -51.192144,\n    \"lon\": -14.519091,\n    \"weatherCondition\": \"cloudy\",\n    \"createdDate\": \"2020-05-22T21:22:06.91881\",\n    \"modifiedDate\": \"2020-05-22T21:22:06.918815\",\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"user1@user1.com\",\n        \"role\": \"USER\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/61",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id}",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"schema = {}",
+											"",
+											"pm.sendRequest(\"http://localhost:8008/apierror.json\", function (err, response) {",
+											"    schema = response.json()",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"//Validate Schema",
+											"pm.test('Schema Validation', function () {",
+											"",
+											"    var result = tv4.validateResult(JSON.parse(responseBody), schema);",
+											"",
+											"    if (!result.valid) {",
+											"        console.log(result);",
+											"    }",
+											"",
+											"    pm.expect(result.valid).to.be.true;",
+											"})",
+											"",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"UNAUTHORIZED\");",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==UNAUTHORIZED\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.message).to.eql(\"Access is denied\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwNjQyNzk4LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYWY3MTM5OWMtYjRiMy00OGZkLTgwMzItYjkwOWVmYjVkNjc4IiwiY2xpZW50X2lkIjoiZXZlbnQifQ.LJEIYK7RxWiH-Du3r2Oh5AeaCBLppd7wmNv_AHoFabo",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAyMDA1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYTc2ZGE1M2MtODgxYy00MzE3LTgwZDgtNDEyZDZlOWU3NjFjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.KoonwMumYSCsbhggD54Tvd8uWmcd2ElqKZFs9bcWkK4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event/61",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event",
+										"61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/api/event/{id} [BAD_REQUEST]",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "299dbe95-54da-446e-9e89-b58375bae44e",
+										"exec": [
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0040068c-3e19-43f2-9042-28358745007a",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"//Check response time",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"pm.test(\"Test apierror.status==BAD_REQUEST\", function () {",
+											"    var jsonData = pm.response.json()",
+											"    pm.expect(jsonData.apierror.status).to.eql(\"BAD_REQUEST\");",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6ImFkbWluQGFkbWluLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1OTA4OTQxNzAsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjE1MDU4NjJjLTJiZDItNDM4Mi1hZWM3LWM0MDE4Nzc1NDk5ZSIsImNsaWVudF9pZCI6ImV2ZW50In0.dbkdsNNGrKipyrcJu7Ld3JXj-8nCFJxtwyx_6rcnvF0",
+											"type": "string"
+										},
+										{
+											"key": "tokenType",
+											"value": "bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6InVzZXJtYW5AdXNlcm1hbi5jb20iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTkwMjAyMDA1LCJhdXRob3JpdGllcyI6WyJVU0VSX01BTkFHRVIiXSwianRpIjoiYTc2ZGE1M2MtODgxYy00MzE3LTgwZDgtNDEyZDZlOWU3NjFjIiwiY2xpZW50X2lkIjoiZXZlbnQifQ.KoonwMumYSCsbhggD54Tvd8uWmcd2ElqKZFs9bcWkK4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"distance\": 999.0,\n    \"duration\": 999.0,\n    \"lat\": -51.192144,\n    \"lon\": -14.519091,\n    \"weatherCondition\": \"cloudy\",\n    \"createdDate\": \"2020-05-22T21:22:06.91881\",\n    \"modifiedDate\": \"2020-05-22T21:22:06.918815\",\n    \"user\": {\n        \"id\": 3,\n        \"email\": \"user1@user1.com\",\n        \"role\": \"USER\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/event",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"event"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

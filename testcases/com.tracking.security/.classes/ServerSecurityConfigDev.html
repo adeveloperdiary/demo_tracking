@@ -1,0 +1,110 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ServerSecurityConfigDev</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.security</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ServerSecurityConfigDev (com.tracking.security)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ServerSecurityConfigDev</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.security;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.context.annotation.Configuration;
+<i>4</i>&nbsp;import org.springframework.context.annotation.Profile;
+<i>5</i>&nbsp;import org.springframework.core.annotation.Order;
+<i>6</i>&nbsp;import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+<i>7</i>&nbsp;import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * Default implementation class for ServerSecurityConfigDev.
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; * @version 1.0
+<i>12</i>&nbsp; * @dete 05-18-2020
+<i>13</i>&nbsp; **/
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;@Configuration
+<i>16</i>&nbsp;@Profile(&quot;dev&quot;)
+<i>17</i>&nbsp;@Order(1)
+<b class="nc"><i>18</i>&nbsp;public class ServerSecurityConfigDev extends WebSecurityConfigurerAdapter {</b>
+<i>19</i>&nbsp;    @Override
+<i>20</i>&nbsp;    protected void configure(HttpSecurity http) throws Exception {
+<b class="nc"><i>21</i>&nbsp;        http.antMatcher(&quot;/api/console/**&quot;).headers().frameOptions().sameOrigin().and()</b>
+<b class="nc"><i>22</i>&nbsp;                .cors().and()</b>
+<b class="nc"><i>23</i>&nbsp;                .csrf().disable();</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": [],
+  "examples": [
+    [
+      {
+        "week": 21,
+        "year": 2020,
+        "distance": 597.3333333333334,
+        "speed": 0.44396177698217953
+      }
+    ]
+  ],
+  "additionalItems": true,
+  "items": {
+    "anyOf": [
+      {
+        "$id": "#/items/anyOf/0",
+        "type": "object",
+        "title": "The first anyOf schema",
+        "description": "An explanation about the purpose of this instance.",
+        "default": {},
+        "examples": [
+          {
+            "week": 21,
+            "year": 2020,
+            "distance": 597.3333333333334,
+            "speed": 0.44396177698217953
+          }
+        ],
+        "required": [
+          "week",
+          "year",
+          "distance",
+          "speed"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "week": {
+            "$id": "#/items/anyOf/0/properties/week",
+            "type": "integer",
+            "title": "The week schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+              21
+            ]
+          },
+          "year": {
+            "$id": "#/items/anyOf/0/properties/year",
+            "type": "integer",
+            "title": "The year schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0,
+            "examples": [
+              2020
+            ]
+          },
+          "distance": {
+            "$id": "#/items/anyOf/0/properties/distance",
+            "type": "number",
+            "title": "The distance schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+              597.3333333333334
+            ]
+          },
+          "speed": {
+            "$id": "#/items/anyOf/0/properties/speed",
+            "type": "number",
+            "title": "The speed schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+              0.44396177698217953
+            ]
+          }
+        }
+      }
+    ],
+    "$id": "#/items"
+  }
+}

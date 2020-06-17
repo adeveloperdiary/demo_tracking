@@ -1,0 +1,566 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "content": [
+        {
+          "id": 16,
+          "date": "2020-02-10",
+          "time": "12:24:55",
+          "distance": 122.0,
+          "duration": 172.0,
+          "lat": -49.6948,
+          "lon": -67.58629,
+          "weatherCondition": "foggy",
+          "createdDate": "2020-05-22T21:15:16.858755",
+          "modifiedDate": "2020-05-22T21:15:16.858762",
+          "user": {
+            "id": 3,
+            "email": "user1@user1.com",
+            "role": "USER"
+          }
+        }
+      ],
+      "pageable": {
+        "sort": {
+          "sorted": false,
+          "unsorted": true,
+          "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 20,
+        "unpaged": false,
+        "paged": true
+      },
+      "totalPages": 2,
+      "totalElements": 28,
+      "last": false,
+      "size": 20,
+      "number": 0,
+      "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+      },
+      "numberOfElements": 20,
+      "first": true,
+      "empty": false
+    }
+  ],
+  "required": [
+    "content",
+    "pageable",
+    "totalPages",
+    "totalElements",
+    "last",
+    "size",
+    "number",
+    "sort",
+    "numberOfElements",
+    "first",
+    "empty"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "content": {
+      "$id": "#/properties/content",
+      "type": "array",
+      "title": "The content schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "id": 16,
+            "date": "2020-02-10",
+            "time": "12:24:55",
+            "distance": 122.0,
+            "duration": 172.0,
+            "lat": -49.6948,
+            "lon": -67.58629,
+            "weatherCondition": "foggy",
+            "createdDate": "2020-05-22T21:15:16.858755",
+            "modifiedDate": "2020-05-22T21:15:16.858762",
+            "user": {
+              "id": 3,
+              "email": "user1@user1.com",
+              "role": "USER"
+            }
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/content/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+              {
+                "id": 16,
+                "date": "2020-02-10",
+                "time": "12:24:55",
+                "distance": 122.0,
+                "duration": 172.0,
+                "lat": -49.6948,
+                "lon": -67.58629,
+                "weatherCondition": "foggy",
+                "createdDate": "2020-05-22T21:15:16.858755",
+                "modifiedDate": "2020-05-22T21:15:16.858762",
+                "user": {
+                  "id": 3,
+                  "email": "user1@user1.com",
+                  "role": "USER"
+                }
+              }
+            ],
+            "required": [
+              "id",
+              "date",
+              "time",
+              "distance",
+              "duration",
+              "lat",
+              "lon",
+              "weatherCondition",
+              "createdDate",
+              "modifiedDate",
+              "user"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "id": {
+                "$id": "#/properties/content/items/anyOf/0/properties/id",
+                "type": "integer",
+                "title": "The id schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                  16
+                ]
+              },
+              "date": {
+                "$id": "#/properties/content/items/anyOf/0/properties/date",
+                "type": "string",
+                "title": "The date schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "2020-02-10"
+                ]
+              },
+              "time": {
+                "$id": "#/properties/content/items/anyOf/0/properties/time",
+                "type": "string",
+                "title": "The time schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "12:24:55"
+                ]
+              },
+              "distance": {
+                "$id": "#/properties/content/items/anyOf/0/properties/distance",
+                "type": "number",
+                "title": "The distance schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0.0,
+                "examples": [
+                  122.0
+                ]
+              },
+              "duration": {
+                "$id": "#/properties/content/items/anyOf/0/properties/duration",
+                "type": "number",
+                "title": "The duration schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0.0,
+                "examples": [
+                  172.0
+                ]
+              },
+              "lat": {
+                "$id": "#/properties/content/items/anyOf/0/properties/lat",
+                "type": "number",
+                "title": "The lat schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0.0,
+                "examples": [
+                  -49.6948
+                ]
+              },
+              "lon": {
+                "$id": "#/properties/content/items/anyOf/0/properties/lon",
+                "type": "number",
+                "title": "The lon schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0.0,
+                "examples": [
+                  -67.58629
+                ]
+              },
+              "weatherCondition": {
+                "$id": "#/properties/content/items/anyOf/0/properties/weatherCondition",
+                "type": "string",
+                "title": "The weatherCondition schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "foggy"
+                ]
+              },
+              "createdDate": {
+                "$id": "#/properties/content/items/anyOf/0/properties/createdDate",
+                "type": "string",
+                "title": "The createdDate schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "2020-05-22T21:15:16.858755"
+                ]
+              },
+              "modifiedDate": {
+                "$id": "#/properties/content/items/anyOf/0/properties/modifiedDate",
+                "type": "string",
+                "title": "The modifiedDate schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                  "2020-05-22T21:15:16.858762"
+                ]
+              },
+              "user": {
+                "$id": "#/properties/content/items/anyOf/0/properties/user",
+                "type": "object",
+                "title": "The user schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                  {
+                    "id": 3,
+                    "email": "user1@user1.com",
+                    "role": "USER"
+                  }
+                ],
+                "required": [
+                  "id",
+                  "email",
+                  "role"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "id": {
+                    "$id": "#/properties/content/items/anyOf/0/properties/user/properties/id",
+                    "type": "integer",
+                    "title": "The id schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                      3
+                    ]
+                  },
+                  "email": {
+                    "$id": "#/properties/content/items/anyOf/0/properties/user/properties/email",
+                    "type": "string",
+                    "title": "The email schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "user1@user1.com"
+                    ]
+                  },
+                  "role": {
+                    "$id": "#/properties/content/items/anyOf/0/properties/user/properties/role",
+                    "type": "string",
+                    "title": "The role schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                      "USER"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "$id": "#/properties/content/items"
+      }
+    },
+    "pageable": {
+      "$id": "#/properties/pageable",
+      "type": "object",
+      "title": "The pageable schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+          },
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 20,
+          "unpaged": false,
+          "paged": true
+        }
+      ],
+      "required": [
+        "sort",
+        "offset",
+        "pageNumber",
+        "pageSize",
+        "unpaged",
+        "paged"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "sort": {
+          "$id": "#/properties/pageable/properties/sort",
+          "type": "object",
+          "title": "The sort schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
+            {
+              "sorted": false,
+              "unsorted": true,
+              "empty": true
+            }
+          ],
+          "required": [
+            "sorted",
+            "unsorted",
+            "empty"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "sorted": {
+              "$id": "#/properties/pageable/properties/sort/properties/sorted",
+              "type": "boolean",
+              "title": "The sorted schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                false
+              ]
+            },
+            "unsorted": {
+              "$id": "#/properties/pageable/properties/sort/properties/unsorted",
+              "type": "boolean",
+              "title": "The unsorted schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                true
+              ]
+            },
+            "empty": {
+              "$id": "#/properties/pageable/properties/sort/properties/empty",
+              "type": "boolean",
+              "title": "The empty schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": false,
+              "examples": [
+                true
+              ]
+            }
+          }
+        },
+        "offset": {
+          "$id": "#/properties/pageable/properties/offset",
+          "type": "integer",
+          "title": "The offset schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            0
+          ]
+        },
+        "pageNumber": {
+          "$id": "#/properties/pageable/properties/pageNumber",
+          "type": "integer",
+          "title": "The pageNumber schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            0
+          ]
+        },
+        "pageSize": {
+          "$id": "#/properties/pageable/properties/pageSize",
+          "type": "integer",
+          "title": "The pageSize schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            20
+          ]
+        },
+        "unpaged": {
+          "$id": "#/properties/pageable/properties/unpaged",
+          "type": "boolean",
+          "title": "The unpaged schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        },
+        "paged": {
+          "$id": "#/properties/pageable/properties/paged",
+          "type": "boolean",
+          "title": "The paged schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        }
+      }
+    },
+    "totalPages": {
+      "$id": "#/properties/totalPages",
+      "type": "integer",
+      "title": "The totalPages schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        2
+      ]
+    },
+    "totalElements": {
+      "$id": "#/properties/totalElements",
+      "type": "integer",
+      "title": "The totalElements schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        28
+      ]
+    },
+    "last": {
+      "$id": "#/properties/last",
+      "type": "boolean",
+      "title": "The last schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "size": {
+      "$id": "#/properties/size",
+      "type": "integer",
+      "title": "The size schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        20
+      ]
+    },
+    "number": {
+      "$id": "#/properties/number",
+      "type": "integer",
+      "title": "The number schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "sort": {
+      "$id": "#/properties/sort",
+      "type": "object",
+      "title": "The sort schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "sorted": false,
+          "unsorted": true,
+          "empty": true
+        }
+      ],
+      "required": [
+        "sorted",
+        "unsorted",
+        "empty"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "sorted": {
+          "$id": "#/properties/sort/properties/sorted",
+          "type": "boolean",
+          "title": "The sorted schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            false
+          ]
+        },
+        "unsorted": {
+          "$id": "#/properties/sort/properties/unsorted",
+          "type": "boolean",
+          "title": "The unsorted schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "empty": {
+          "$id": "#/properties/sort/properties/empty",
+          "type": "boolean",
+          "title": "The empty schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": false,
+          "examples": [
+            true
+          ]
+        }
+      }
+    },
+    "numberOfElements": {
+      "$id": "#/properties/numberOfElements",
+      "type": "integer",
+      "title": "The numberOfElements schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        20
+      ]
+    },
+    "first": {
+      "$id": "#/properties/first",
+      "type": "boolean",
+      "title": "The first schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        true
+      ]
+    },
+    "empty": {
+      "$id": "#/properties/empty",
+      "type": "boolean",
+      "title": "The empty schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    }
+  }
+}

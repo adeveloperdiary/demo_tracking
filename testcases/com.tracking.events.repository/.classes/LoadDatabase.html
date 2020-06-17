@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LoadDatabase</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.events.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LoadDatabase (com.tracking.events.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoadDatabase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.events.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.tracking.events.repository.entity.Event;
+<i>5</i>&nbsp;import com.tracking.events.service.EventService;
+<i>6</i>&nbsp;import com.tracking.users.repository.UserRepository;
+<i>7</i>&nbsp;import com.tracking.users.repository.entity.User;
+<i>8</i>&nbsp;import lombok.extern.slf4j.Slf4j;
+<i>9</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>10</i>&nbsp;import org.springframework.beans.factory.annotation.Value;
+<i>11</i>&nbsp;import org.springframework.boot.CommandLineRunner;
+<i>12</i>&nbsp;import org.springframework.context.annotation.Bean;
+<i>13</i>&nbsp;import org.springframework.context.annotation.Configuration;
+<i>14</i>&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;import java.math.BigDecimal;
+<i>17</i>&nbsp;import java.math.RoundingMode;
+<i>18</i>&nbsp;import java.text.ParseException;
+<i>19</i>&nbsp;import java.text.SimpleDateFormat;
+<i>20</i>&nbsp;import java.time.LocalDate;
+<i>21</i>&nbsp;import java.time.LocalDateTime;
+<i>22</i>&nbsp;import java.time.LocalTime;
+<i>23</i>&nbsp;import java.util.Date;
+<i>24</i>&nbsp;import java.util.Random;
+<i>25</i>&nbsp;import java.util.concurrent.ThreadLocalRandom;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Demo class to load dummy data into the database during server startup.
+<i>29</i>&nbsp; *
+<i>30</i>&nbsp; * @version 1.0
+<i>31</i>&nbsp; * @dete 05-18-2020
+<i>32</i>&nbsp; */
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;@Configuration
+<b class="nc"><i>35</i>&nbsp;@Slf4j</b>
+<b class="nc"><i>36</i>&nbsp;public class LoadDatabase {</b>
+<i>37</i>&nbsp;    @Value(&quot;${data.users:admin,userman,user1,user2,user3,user4,user5}&quot;)
+<i>38</i>&nbsp;    private String[] users;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Autowired
+<i>41</i>&nbsp;    private PasswordEncoder passwordEncoder;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    @Autowired
+<i>44</i>&nbsp;    private EventService business;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    int rnd(int size) {
+<b class="nc"><i>47</i>&nbsp;        return (int) (Math.random() * size);</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    public double round(double value, int places) {
+<b class="nc"><i>51</i>&nbsp;        if (places &lt; 0) throw new IllegalArgumentException();</b>
+<i>52</i>&nbsp;
+<b class="nc"><i>53</i>&nbsp;        BigDecimal bd = BigDecimal.valueOf(value);</b>
+<b class="nc"><i>54</i>&nbsp;        bd = bd.setScale(places, RoundingMode.HALF_UP);</b>
+<b class="nc"><i>55</i>&nbsp;        return bd.doubleValue();</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public double randLocation(double min, double max) {
+<b class="nc"><i>59</i>&nbsp;        Random rand = new Random();</b>
+<b class="nc"><i>60</i>&nbsp;        return round(rand.nextDouble() * (max - min) + min, 6);</b>
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    public LocalDate getRandomDate() throws ParseException {
+<i>64</i>&nbsp;
+<b class="nc"><i>65</i>&nbsp;        SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</b>
+<b class="nc"><i>66</i>&nbsp;        String start = &quot;2020-01-01&quot;;</b>
+<i>67</i>&nbsp;
+<b class="nc"><i>68</i>&nbsp;        long startMillis = format.parse(start).getTime();</b>
+<b class="nc"><i>69</i>&nbsp;        long endMillis = (new Date()).getTime();</b>
+<i>70</i>&nbsp;        long randomMillisSinceEpoch = ThreadLocalRandom
+<b class="nc"><i>71</i>&nbsp;                .current()</b>
+<b class="nc"><i>72</i>&nbsp;                .nextLong(startMillis, endMillis);</b>
+<i>73</i>&nbsp;
+<b class="nc"><i>74</i>&nbsp;        return LocalDate.parse(format.format(new Date(randomMillisSinceEpoch)));</b>
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    @Bean
+<i>78</i>&nbsp;    CommandLineRunner initUsers(UserRepository repo) {
+<b class="nc"><i>79</i>&nbsp;        return args -&gt; {</b>
+<b class="nc"><i>80</i>&nbsp;            for (int i = 0; i &lt; users.length; i++) {</b>
+<b class="nc"><i>81</i>&nbsp;                String email = users[i] + &quot;@&quot; + users[i] + &quot;.com&quot;;</b>
+<b class="nc"><i>82</i>&nbsp;                User.Role role = i &gt; 1 ? User.Role.USER : i == 0 ? User.Role.ADMIN : User.Role.USER_MANAGER;</b>
+<b class="nc"><i>83</i>&nbsp;                String pwd = passwordEncoder.encode(&quot;pwd&quot;);</b>
+<b class="nc"><i>84</i>&nbsp;                log.info(&quot;save {}&quot;, repo.save(new User(null, email, pwd, role, null)));</b>
+<i>85</i>&nbsp;            }
+<i>86</i>&nbsp;        };
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    @Bean
+<i>90</i>&nbsp;    CommandLineRunner initEvent(EventRepository repo, UserRepository userRepo) {
+<b class="nc"><i>91</i>&nbsp;        return args -&gt; {</b>
+<b class="nc"><i>92</i>&nbsp;            for (int i = 0; i &lt; 200; i++) {</b>
+<b class="nc"><i>93</i>&nbsp;                LocalDate date = LocalDate.ofEpochDay((long) (10_00L + Math.random() * 10_00));</b>
+<b class="nc"><i>94</i>&nbsp;                LocalTime time = LocalTime.ofSecondOfDay((long) (Math.random() * 24 * 3600));</b>
+<b class="nc"><i>95</i>&nbsp;                int u = rnd(users.length);</b>
+<b class="nc"><i>96</i>&nbsp;                double distance = rnd(1000);</b>
+<b class="nc"><i>97</i>&nbsp;                double duration = rnd((int) (distance) * 4);</b>
+<b class="nc"><i>98</i>&nbsp;                User user = userRepo.findByEmail(users[u] + &quot;@&quot; + users[u] + &quot;.com&quot;).orElse(userRepo.findAll().iterator().next());</b>
+<b class="nc"><i>99</i>&nbsp;                Event event = new Event(null, getRandomDate(), time, distance, duration, randLocation(-90.0, 90.0), randLocation(-180.0, 180.0), null, LocalDateTime.now(), LocalDateTime.now(), user);</b>
+<b class="nc"><i>100</i>&nbsp;                event.setWeatherCondition(business.fetchWeatherCondition(event));</b>
+<b class="nc"><i>101</i>&nbsp;                log.info(&quot;save {}&quot;, repo.save(event));</b>
+<i>102</i>&nbsp;            }
+<i>103</i>&nbsp;        };
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;}
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

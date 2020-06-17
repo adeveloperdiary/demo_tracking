@@ -1,0 +1,118 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.security</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.tracking.security)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.security;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.tracking.users.repository.UserRepository;
+<i>4</i>&nbsp;import com.tracking.users.repository.entity.User;
+<i>5</i>&nbsp;import org.springframework.security.core.GrantedAuthority;
+<i>6</i>&nbsp;import org.springframework.security.core.authority.SimpleGrantedAuthority;
+<i>7</i>&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+<i>8</i>&nbsp;import org.springframework.security.core.userdetails.UserDetailsService;
+<i>9</i>&nbsp;import org.springframework.security.core.userdetails.UsernameNotFoundException;
+<i>10</i>&nbsp;import org.springframework.stereotype.Service;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import java.util.Arrays;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; * Implementation class for UserService. This is used by the security services
+<i>16</i>&nbsp; *
+<i>17</i>&nbsp; * @version 1.0
+<i>18</i>&nbsp; * @dete 05-18-2020
+<i>19</i>&nbsp; **/
+<i>20</i>&nbsp;@Service
+<i>21</i>&nbsp;public class UserService implements UserDetailsService {
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    private final UserRepository repository;
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;    public UserService(UserRepository repository) {</b>
+<b class="nc"><i>26</i>&nbsp;        this.repository = repository;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+<b class="nc"><i>31</i>&nbsp;        User user = repository.findByEmail(username).orElseThrow(() -&gt; new RuntimeException(&quot;User not found: &quot; + username));</b>
+<b class="nc"><i>32</i>&nbsp;        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());</b>
+<b class="nc"><i>33</i>&nbsp;        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Arrays.asList(authority));</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

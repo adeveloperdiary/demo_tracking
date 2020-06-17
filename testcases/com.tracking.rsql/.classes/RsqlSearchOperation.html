@@ -1,0 +1,115 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RsqlSearchOperation</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.rsql</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RsqlSearchOperation (com.tracking.rsql)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RsqlSearchOperation</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.rsql;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import cz.jirutka.rsql.parser.ast.ComparisonOperator;
+<i>4</i>&nbsp;import cz.jirutka.rsql.parser.ast.RSQLOperators;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.Arrays;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Default implementation class for RsqlSearchOperation
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; * @version 1.0
+<i>11</i>&nbsp; * @dete 05-18-2020
+<i>12</i>&nbsp; **/
+<b class="nc"><i>13</i>&nbsp;public enum RsqlSearchOperation {</b>
+<b class="nc"><i>14</i>&nbsp;    EQUAL(RSQLOperators.EQUAL), NOT_EQUAL(RSQLOperators.NOT_EQUAL), GREATER_THAN(RSQLOperators.GREATER_THAN), GREATER_THAN_OR_EQUAL(RSQLOperators.GREATER_THAN_OR_EQUAL), LESS_THAN(RSQLOperators.LESS_THAN), LESS_THAN_OR_EQUAL(</b>
+<b class="nc"><i>15</i>&nbsp;            RSQLOperators.LESS_THAN_OR_EQUAL), IN(RSQLOperators.IN), NOT_IN(RSQLOperators.NOT_IN);</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    private ComparisonOperator operator;
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;    RsqlSearchOperation(final ComparisonOperator operator) {</b>
+<b class="nc"><i>20</i>&nbsp;        this.operator = operator;</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public static RsqlSearchOperation getSimpleOperator(final ComparisonOperator operator) {
+<b class="nc"><i>24</i>&nbsp;        return Arrays.stream(values())</b>
+<b class="nc"><i>25</i>&nbsp;                .filter(operation -&gt; operation.getOperator() == operator)</b>
+<b class="nc"><i>26</i>&nbsp;                .findAny().orElse(null);</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public ComparisonOperator getOperator() {
+<b class="nc"><i>30</i>&nbsp;        return operator;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>

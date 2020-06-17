@@ -1,0 +1,195 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "id": 61,
+      "date": "2020-04-26",
+      "time": "19:28:05",
+      "distance": 327.0,
+      "duration": 897.0,
+      "lat": -51.192144,
+      "lon": -14.519091,
+      "weatherCondition": "sunny",
+      "createdDate": "2020-05-22T21:22:06.91881",
+      "modifiedDate": "2020-05-22T21:22:06.918815",
+      "user": {
+        "id": 3,
+        "email": "user1@user1.com",
+        "role": "USER"
+      }
+    }
+  ],
+  "required": [
+    "id",
+    "date",
+    "time",
+    "distance",
+    "duration",
+    "lat",
+    "lon",
+    "weatherCondition",
+    "createdDate",
+    "modifiedDate",
+    "user"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0,
+      "examples": [
+        61
+      ]
+    },
+    "date": {
+      "$id": "#/properties/date",
+      "type": "string",
+      "title": "The date schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "2020-04-26"
+      ]
+    },
+    "time": {
+      "$id": "#/properties/time",
+      "type": "string",
+      "title": "The time schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "19:28:05"
+      ]
+    },
+    "distance": {
+      "$id": "#/properties/distance",
+      "type": "number",
+      "title": "The distance schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0.0,
+      "examples": [
+        327.0
+      ]
+    },
+    "duration": {
+      "$id": "#/properties/duration",
+      "type": "number",
+      "title": "The duration schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0.0,
+      "examples": [
+        897.0
+      ]
+    },
+    "lat": {
+      "$id": "#/properties/lat",
+      "type": "number",
+      "title": "The lat schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0.0,
+      "examples": [
+        -51.192144
+      ]
+    },
+    "lon": {
+      "$id": "#/properties/lon",
+      "type": "number",
+      "title": "The lon schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": 0.0,
+      "examples": [
+        -14.519091
+      ]
+    },
+    "weatherCondition": {
+      "$id": "#/properties/weatherCondition",
+      "type": "string",
+      "title": "The weatherCondition schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "sunny"
+      ]
+    },
+    "createdDate": {
+      "$id": "#/properties/createdDate",
+      "type": "string",
+      "title": "The createdDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "2020-05-22T21:22:06.91881"
+      ]
+    },
+    "modifiedDate": {
+      "$id": "#/properties/modifiedDate",
+      "type": "string",
+      "title": "The modifiedDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "2020-05-22T21:22:06.918815"
+      ]
+    },
+    "user": {
+      "$id": "#/properties/user",
+      "type": "object",
+      "title": "The user schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "id": 3,
+          "email": "user1@user1.com",
+          "role": "USER"
+        }
+      ],
+      "required": [
+        "id",
+        "email",
+        "role"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$id": "#/properties/user/properties/id",
+          "type": "integer",
+          "title": "The id schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
+            3
+          ]
+        },
+        "email": {
+          "$id": "#/properties/user/properties/email",
+          "type": "string",
+          "title": "The email schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "user1@user1.com"
+          ]
+        },
+        "role": {
+          "$id": "#/properties/user/properties/role",
+          "type": "string",
+          "title": "The role schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "USER"
+          ]
+        }
+      }
+    }
+  }
+}
