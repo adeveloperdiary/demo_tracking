@@ -1,0 +1,291 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ApiError</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.tracking.exception</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ApiError (com.tracking.exception)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ApiError</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ApiError$ApiSubError</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ApiError$ApiValidationError</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.tracking.exception;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+<i>5</i>&nbsp;import com.fasterxml.jackson.annotation.JsonTypeInfo;
+<i>6</i>&nbsp;import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+<i>7</i>&nbsp;import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
+<i>8</i>&nbsp;import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
+<i>9</i>&nbsp;import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+<i>10</i>&nbsp;import lombok.AllArgsConstructor;
+<i>11</i>&nbsp;import lombok.Data;
+<i>12</i>&nbsp;import lombok.EqualsAndHashCode;
+<i>13</i>&nbsp;import org.hibernate.validator.internal.engine.path.PathImpl;
+<i>14</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>15</i>&nbsp;import org.springframework.validation.FieldError;
+<i>16</i>&nbsp;import org.springframework.validation.ObjectError;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;import javax.validation.ConstraintViolation;
+<i>19</i>&nbsp;import java.time.LocalDateTime;
+<i>20</i>&nbsp;import java.util.ArrayList;
+<i>21</i>&nbsp;import java.util.List;
+<i>22</i>&nbsp;import java.util.Set;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Implementation of the custom API Error structure.
+<i>25</i>&nbsp; *
+<i>26</i>&nbsp; * @version 1.0
+<i>27</i>&nbsp; * @dete 05-18-2020
+<i>28</i>&nbsp; */
+<b class="nc"><i>29</i>&nbsp;@Data</b>
+<i>30</i>&nbsp;@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.CUSTOM, property = &quot;error&quot;, visible = true)
+<i>31</i>&nbsp;@JsonTypeIdResolver(LowerCaseClassNameResolver.class)
+<i>32</i>&nbsp;class ApiError {
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;    private HttpStatus status;</b>
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    private LocalDateTime timestamp;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @JsonSerialize(using = LocalDateTimeSerializer.class)
+<i>39</i>&nbsp;    @JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+<i>40</i>&nbsp;    @JsonProperty(&quot;date&quot;)
+<i>41</i>&nbsp;    public LocalDateTime getTimestamp() {
+<b class="nc"><i>42</i>&nbsp;        return timestamp;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<b class="nc"><i>45</i>&nbsp;    private String message;</b>
+<b class="nc"><i>46</i>&nbsp;    private String debugMessage;</b>
+<b class="nc"><i>47</i>&nbsp;    private List&lt;ApiSubError&gt; subErrors;</b>
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;    private ApiError() {</b>
+<b class="nc"><i>50</i>&nbsp;        timestamp = LocalDateTime.now();</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    ApiError(HttpStatus status) {
+<b class="nc"><i>54</i>&nbsp;        this();</b>
+<b class="nc"><i>55</i>&nbsp;        this.status = status;</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    ApiError(HttpStatus status, Throwable ex) {
+<b class="nc"><i>59</i>&nbsp;        this();</b>
+<b class="nc"><i>60</i>&nbsp;        this.status = status;</b>
+<b class="nc"><i>61</i>&nbsp;        this.message = &quot;Unexpected error&quot;;</b>
+<b class="nc"><i>62</i>&nbsp;        this.debugMessage = ex.getLocalizedMessage();</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    ApiError(HttpStatus status, String message, Throwable ex) {
+<b class="nc"><i>66</i>&nbsp;        this();</b>
+<b class="nc"><i>67</i>&nbsp;        this.status = status;</b>
+<b class="nc"><i>68</i>&nbsp;        this.message = message;</b>
+<b class="nc"><i>69</i>&nbsp;        this.debugMessage = ex.getLocalizedMessage();</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    private void addSubError(ApiSubError subError) {
+<b class="nc"><i>73</i>&nbsp;        if (subErrors == null) {</b>
+<b class="nc"><i>74</i>&nbsp;            subErrors = new ArrayList&lt;&gt;();</b>
+<i>75</i>&nbsp;        }
+<b class="nc"><i>76</i>&nbsp;        subErrors.add(subError);</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    private void addValidationError(String object, String field, Object rejectedValue, String message) {
+<b class="nc"><i>80</i>&nbsp;        addSubError(new ApiValidationError(object, field, rejectedValue, message));</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    private void addValidationError(String object, String message) {
+<b class="nc"><i>84</i>&nbsp;        addSubError(new ApiValidationError(object, message));</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    private void addValidationError(FieldError fieldError) {
+<b class="nc"><i>88</i>&nbsp;        this.addValidationError(</b>
+<b class="nc"><i>89</i>&nbsp;                fieldError.getObjectName(),</b>
+<b class="nc"><i>90</i>&nbsp;                fieldError.getField(),</b>
+<b class="nc"><i>91</i>&nbsp;                fieldError.getRejectedValue(),</b>
+<b class="nc"><i>92</i>&nbsp;                fieldError.getDefaultMessage());</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    void addValidationErrors(List&lt;FieldError&gt; fieldErrors) {
+<b class="nc"><i>96</i>&nbsp;        fieldErrors.forEach(this::addValidationError);</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    private void addValidationError(ObjectError objectError) {
+<b class="nc"><i>100</i>&nbsp;        this.addValidationError(</b>
+<b class="nc"><i>101</i>&nbsp;                objectError.getObjectName(),</b>
+<b class="nc"><i>102</i>&nbsp;                objectError.getDefaultMessage());</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    void addValidationError(List&lt;ObjectError&gt; globalErrors) {
+<b class="nc"><i>106</i>&nbsp;        globalErrors.forEach(this::addValidationError);</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    /**
+<i>110</i>&nbsp;     * Utility method for adding error of ConstraintViolation. Usually when a @Validated validation fails.
+<i>111</i>&nbsp;     *
+<i>112</i>&nbsp;     * @param cv the ConstraintViolation
+<i>113</i>&nbsp;     */
+<i>114</i>&nbsp;    private void addValidationError(ConstraintViolation&lt;?&gt; cv) {
+<b class="nc"><i>115</i>&nbsp;        this.addValidationError(</b>
+<b class="nc"><i>116</i>&nbsp;                cv.getRootBeanClass().getSimpleName(),</b>
+<b class="nc"><i>117</i>&nbsp;                ((PathImpl) cv.getPropertyPath()).getLeafNode().asString(),</b>
+<b class="nc"><i>118</i>&nbsp;                cv.getInvalidValue(),</b>
+<b class="nc"><i>119</i>&nbsp;                cv.getMessage());</b>
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    void addValidationErrors(Set&lt;ConstraintViolation&lt;?&gt;&gt; constraintViolations) {
+<b class="nc"><i>123</i>&nbsp;        constraintViolations.forEach(this::addValidationError);</b>
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;
+<b class="nc"><i>127</i>&nbsp;    abstract class ApiSubError {</b>
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    }
+<i>130</i>&nbsp;
+<b class="nc"><i>131</i>&nbsp;    @Data</b>
+<b class="nc"><i>132</i>&nbsp;    @EqualsAndHashCode</b>
+<b class="nc"><i>133</i>&nbsp;    @AllArgsConstructor</b>
+<i>134</i>&nbsp;    class ApiValidationError extends ApiSubError {
+<b class="nc"><i>135</i>&nbsp;        private String object;</b>
+<b class="nc"><i>136</i>&nbsp;        private String field;</b>
+<b class="nc"><i>137</i>&nbsp;        private Object rejectedValue;</b>
+<b class="nc"><i>138</i>&nbsp;        private String message;</b>
+<i>139</i>&nbsp;
+<b class="nc"><i>140</i>&nbsp;        ApiValidationError(String object, String message) {</b>
+<b class="nc"><i>141</i>&nbsp;            this.object = object;</b>
+<b class="nc"><i>142</i>&nbsp;            this.message = message;</b>
+<i>143</i>&nbsp;        }
+<i>144</i>&nbsp;    }
+<i>145</i>&nbsp;}
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;class LowerCaseClassNameResolver extends TypeIdResolverBase {
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    @Override
+<i>150</i>&nbsp;    public String idFromValue(Object value) {
+<i>151</i>&nbsp;        return value.getClass().getSimpleName().toLowerCase();
+<i>152</i>&nbsp;    }
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    @Override
+<i>155</i>&nbsp;    public String idFromValueAndType(Object value, Class&lt;?&gt; suggestedType) {
+<i>156</i>&nbsp;        return idFromValue(value);
+<i>157</i>&nbsp;    }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    @Override
+<i>160</i>&nbsp;    public JsonTypeInfo.Id getMechanism() {
+<i>161</i>&nbsp;        return JsonTypeInfo.Id.CUSTOM;
+<i>162</i>&nbsp;    }
+<i>163</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-30 22:47</div>
+</div>
+</body>
+</html>
